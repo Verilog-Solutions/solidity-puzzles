@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/token/ERC777/IERC777Recipient.sol";
 
 contract AgraveVictim is IAgraveVictim, IERC777Recipient {
     IAgraveToken token;
-    mapping(address => uint256) amounts;
+    mapping(address => uint256) public amounts;
 
     constructor(IAgraveToken token_address) {
         token = token_address;
@@ -23,11 +23,10 @@ contract AgraveVictim is IAgraveVictim, IERC777Recipient {
     ) external override {
         // omit all the parameter unused warnings
         operator;
-        from;
         to;
         userData;
         operatorData;
-        amounts[msg.sender] += amount;
+        amounts[from] += amount;
     }
 
     function deposit(uint256 amount) external override {

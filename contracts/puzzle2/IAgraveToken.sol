@@ -11,4 +11,9 @@ interface IAgraveToken {
         address recipient,
         uint256 amount
     ) external;
+
+    function increaseAllowance(
+        address spender, 
+        uint256 addedValue
+    ) external;
 }
