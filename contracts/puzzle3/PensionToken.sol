@@ -11,5 +11,12 @@ contract PensionToken is ERC20 {
         _mint(msg.sender, initialSupply);
     }
 
+
+    function buy() external payable {
+        // let's do a 1:1 exchange from eth to pensionToken
+        _mint(msg.sender, msg.value);
+    }
+
+
     // all other functions (like transfer(), balanceOf() are inherited from ERC20.)
 }

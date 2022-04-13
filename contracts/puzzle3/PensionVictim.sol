@@ -6,7 +6,7 @@ import "./IPensionToken.sol";
 
 contract PensionVictim is IPensionVictim {
     IPensionToken token;
-    mapping(address => uint256) amounts;
+    mapping(address => uint256) public amounts;
 
     constructor(IPensionToken token_address) {
         token = token_address;
@@ -23,6 +23,6 @@ contract PensionVictim is IPensionVictim {
     {
         uint256 amount = amounts[msg.sender];
         distributor.distribute(recipient, amount);
-        amounts[msg.sender] = 0;
+        //amounts[msg.sender] = 0;
     }
 }
