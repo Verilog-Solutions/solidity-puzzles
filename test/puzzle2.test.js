@@ -82,7 +82,7 @@ describe("Puzzle 2", function () {
 
     it("Attack: Attacker can withdraw more AgraveToken from AgraveVictim than he deposits.", async function () {
         const beforeBalanceAgraveVictim = await agraveToken.balanceOf(agraveVictim.address);
-        const beforeBalanceAttacker = await agraveToken.balanceOf(attacker.address);
+        const beforeBalanceAttacker = await agraveToken.balanceOf(agraveAttacker.address);
 
         console.log("beforeBalanceAttacker: " + beforeBalanceAttacker.toString());
         console.log("beforeBalanceAgraveVictim: " + beforeBalanceAgraveVictim.toString());
@@ -94,7 +94,7 @@ describe("Puzzle 2", function () {
         await agraveAttacker.connect(attacker).attack(depositAmount);
 
         const afterBalanceAgraveVictim = await agraveToken.balanceOf(agraveVictim.address);
-        const afterBalanceAttacker = await agraveToken.balanceOf(attacker.address);
+        const afterBalanceAttacker = await agraveToken.balanceOf(agraveAttacker.address);
 
         console.log("afterBalanceAttacker: " + afterBalanceAttacker.toString());
         console.log("afterBalanceAgraveVictim: " + afterBalanceAgraveVictim.toString());
@@ -103,7 +103,7 @@ describe("Puzzle 2", function () {
         // https://ethereum-waffle.readthedocs.io/en/latest/matchers.html#bignumbers
         expect(afterBalanceAttacker.sub(beforeBalanceAttacker)).to.above(depositAmount);
         // ^ attacker gets more than he deposit
-        expect(afterBalanceAgraveVictim).to.below(afterBalanceAgraveVictim.sub(depositAmount));
+        expect(afterBalanceAgraveVictim).to.below(beforeBalanceAgraveVictim.sub(depositAmount));
         // ^ victim losses more than attacker should take
     });
 

