@@ -26,7 +26,7 @@ contract AgraveVictim is IAgraveVictim, IERC777Recipient {
     }
 
     function deposit(uint256 amount) external {
-        token.transfer(address(this), amount);
+        token.transferFrom(msg.sender, address(this), amount);
         //amounts[msg.sender] += amount; // this is done by tokensReceived()
     }
 

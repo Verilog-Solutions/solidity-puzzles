@@ -12,4 +12,6 @@ contract AgraveToken is ERC777 {
     {
         _mint(msg.sender, initialSupply, "", "");
     }
+
+    // all other functions (like transfer(), balanceOf() are inherited from ERC777.)
 }

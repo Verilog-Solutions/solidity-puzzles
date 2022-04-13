@@ -2,5 +2,5 @@
 pragma solidity ^0.8.4;
 
 interface IPensionDistributor {
-    function distribute(address recipient) external;
+    function distribute(address recipient, uint256 amount) external;
 }

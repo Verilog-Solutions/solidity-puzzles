@@ -13,7 +13,10 @@ contract PensionDistributor is IPensionDistributor, Ownable, Whitelistable {
         token = token_address;
     }
 
-    function distribute(address recipient) external onlyWhitelist {
-        token.transfer();
+    function distribute(address recipient, uint256 amount)
+        external
+        onlyWhitelist //only the PensionVictim contract address in whitelist
+    {
+        token.transfer(recipient, amount);
     }
 }

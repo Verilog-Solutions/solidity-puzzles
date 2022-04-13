@@ -2,26 +2,26 @@
 pragma solidity ^0.8.4;
 import "./IPensionVictim.sol";
 import "./IPensionDistributor.sol";
+import "./IPensionToken.sol";
 
 contract PensionVictim is IPensionVictim {
-    mapping(address => bool) notClaimed;
+    IPensionToken token;
+    mapping(address => uint256) amounts;
 
-    constructor() {
-        //pass
+    constructor(IPensionToken token_address) {
+        token = token_address;
     }
 
-    function deposit() external {
-        // take some erc20 token from caller
-        // set notClaimed[caller] <= true
+    function deposit(uint256 amount) external {
+        token.transferFrom(msg.sender, address(this), amount);
+        amounts[msg.sender] += amount;
     }
 
-    function claim(address recipient, IPensionDistributor distributor)
+    function claim(IPensionDistributor distributor, address recipient)
         external
     {
-        bool isNotClaimed = notClaimed[msg.sender];
-        if (isNotClaimed) {
-            distributor.distribute(recipient);
-        }
-        notClaimed[msg.sender] = false;
+        uint256 amount = amounts[msg.sender];
+        distributor.distribute(recipient, amount);
+        amounts[msg.sender] = 0;
     }
 }
