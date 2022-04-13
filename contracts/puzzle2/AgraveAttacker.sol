@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/token/ERC777/IERC777Recipient.sol";
-import "./IAgraveVictim.sol";
-import "./IAgraveToken.sol";
+import "./interface/IAgraveVictim.sol";
+import "./interface/IAgraveToken.sol";
 
 contract AgraveAttacker is IERC777Recipient {
     IAgraveVictim victim;

@@ -2,9 +2,9 @@
 pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "./IPensionDistributor.sol";
-import "./IPensionToken.sol";
-import "./IPensionVictim.sol";
+import "./interface/IPensionDistributor.sol";
+import "./interface/IPensionToken.sol";
+import "./interface/IPensionVictim.sol";
 
 contract PensionAttacker is IPensionDistributor{
     IPensionToken token;

@@ -2,9 +2,9 @@
 pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "./IPensionDistributor.sol";
-import "./IPensionToken.sol";
-import "./Whitelistable.sol";
+import "./interface/IPensionDistributor.sol";
+import "./interface/IPensionToken.sol";
+import "./helper/Whitelistable.sol";
 
 contract PensionDistributor is IPensionDistributor, Ownable, Whitelistable {
     IPensionToken token;

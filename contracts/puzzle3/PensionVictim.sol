@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.4;
-import "./IPensionVictim.sol";
-import "./IPensionDistributor.sol";
-import "./IPensionToken.sol";
+import "./interface/IPensionVictim.sol";
+import "./interface/IPensionDistributor.sol";
+import "./interface/IPensionToken.sol";
 
 contract PensionVictim is IPensionVictim {
     IPensionToken token;
