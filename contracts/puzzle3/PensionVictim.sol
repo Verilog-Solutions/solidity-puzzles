@@ -12,13 +12,14 @@ contract PensionVictim is IPensionVictim {
         token = token_address;
     }
 
-    function deposit(uint256 amount) external {
+    function deposit(uint256 amount) external override {
         token.transferFrom(msg.sender, address(this), amount);
         amounts[msg.sender] += amount;
     }
 
     function claim(IPensionDistributor distributor, address recipient)
         external
+        override
     {
         uint256 amount = amounts[msg.sender];
         distributor.distribute(recipient, amount);

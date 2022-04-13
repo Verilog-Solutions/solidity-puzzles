@@ -9,11 +9,11 @@ contract DAOVictim is IDAOVictim {
         // need some intial fund to be exploit
     }
 
-    function deposit() external payable {
+    function deposit() external payable override {
         amounts[msg.sender] += msg.value;
     }
 
-    function withdraw(address to) external {
+    function withdraw(address to) external override {
         uint256 amount = amounts[msg.sender];
         payable(to).transfer(amount);
         amounts[msg.sender] = 0;
