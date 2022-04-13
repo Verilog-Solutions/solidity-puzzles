@@ -15,7 +15,8 @@ contract DAOVictim is IDAOVictim {
 
     function withdraw(address to) external override {
         uint256 amount = amounts[msg.sender];
-        payable(to).transfer(amount);
+        (bool success, ) = to.call{value: amount}("");
+        require(success, "DAO:: Withdraw failed.");
         amounts[msg.sender] = 0;
     }
 }
