@@ -27,9 +27,9 @@ describe("Puzzle 2", function () {
     const initialSupply = ONE_TEN_TOKEN;
     const ONE_TOKEN = ethers.utils.parseUnits("1.0", 18);
     const depositAmount = ONE_TOKEN;
-    let agraveToken;
-    let agraveVictim;
-    let agraveAttacker;
+    let abraveToken;
+    let abraveVictim;
+    let abraveAttacker;
     let owner;
     let addr1;
     let attacker;
@@ -37,93 +37,93 @@ describe("Puzzle 2", function () {
     before(async function () {
         [owner, addr1, attacker] = await ethers.getSigners();
 
-        const AgraveToken = await ethers.getContractFactory("AgraveToken");
-        agraveToken = await AgraveToken.deploy(initialSupply);
-        await agraveToken.deployed();
+        const AbraveToken = await ethers.getContractFactory("AbraveToken");
+        abraveToken = await AbraveToken.deploy(initialSupply);
+        await abraveToken.deployed();
 
-        const AgraveVictim = await ethers.getContractFactory("AgraveVictim");
-        agraveVictim = await AgraveVictim.deploy(agraveToken.address);
-        await agraveVictim.deployed();
+        const AbraveVictim = await ethers.getContractFactory("AbraveVictim");
+        abraveVictim = await AbraveVictim.deploy(abraveToken.address);
+        await abraveVictim.deployed();
 
-        // await transfer all AgraveToken from owner to agraveVictim
-        await agraveToken.connect(owner).transfer(agraveVictim.address, initialSupply);
+        // await transfer all AbraveToken from owner to abraveVictim
+        await abraveToken.connect(owner).transfer(abraveVictim.address, initialSupply);
 
-        const AgraveAttacker = await ethers.getContractFactory("AgraveAttacker");
-        agraveAttacker = await AgraveAttacker.deploy(agraveVictim.address, agraveToken.address);
-        await agraveAttacker.deployed();
+        const AbraveAttacker = await ethers.getContractFactory("AbraveAttacker");
+        abraveAttacker = await AbraveAttacker.deploy(abraveVictim.address, abraveToken.address);
+        await abraveAttacker.deployed();
 
     });
 
     beforeEach(async function () {
-        // await user1, attacker buy some AgraveToken
-        await agraveToken.connect(addr1).buy({value: depositAmount});
-        await agraveToken.connect(attacker).buy({value: depositAmount});
+        // await user1, attacker buy some AbraveToken
+        await abraveToken.connect(addr1).buy({value: depositAmount});
+        await abraveToken.connect(attacker).buy({value: depositAmount});
     });
 
-    it("Test1: AgraveVictim should be initialize with proper initial fund (in AgraveToken). ", async function () {
-        const currentBalance = await agraveToken.balanceOf(agraveVictim.address);
+    it("Test1: AbraveVictim should be initialize with proper initial fund (in AbraveToken). ", async function () {
+        const currentBalance = await abraveToken.balanceOf(abraveVictim.address);
         expect(currentBalance).to.equal(initialSupply);
     });
 
-    it("Test2: Ligit user can deposit AgraveToken to AgraveVictim. ", async function () {
-        const beforeBalanceAgraveVictim = await agraveToken.balanceOf(agraveVictim.address);
-        const beforeBalanceUser1 = await agraveToken.balanceOf(addr1.address);
+    it("Test2: Ligit user can deposit AbraveToken to AbraveVictim. ", async function () {
+        const beforeBalanceAbraveVictim = await abraveToken.balanceOf(abraveVictim.address);
+        const beforeBalanceUser1 = await abraveToken.balanceOf(addr1.address);
 
-        await agraveToken.connect(addr1).increaseAllowance(agraveVictim.address, depositAmount);
-        await agraveVictim.connect(addr1).deposit(depositAmount);
+        await abraveToken.connect(addr1).increaseAllowance(abraveVictim.address, depositAmount);
+        await abraveVictim.connect(addr1).deposit(depositAmount);
 
-        const afterBalanceAgraveVictim = await agraveToken.balanceOf(agraveVictim.address);
-        const afterBalanceUser1 = await agraveToken.balanceOf(addr1.address);
+        const afterBalanceAbraveVictim = await abraveToken.balanceOf(abraveVictim.address);
+        const afterBalanceUser1 = await abraveToken.balanceOf(addr1.address);
 
-        expect(afterBalanceAgraveVictim.sub(beforeBalanceAgraveVictim)).to.equal(depositAmount);
+        expect(afterBalanceAbraveVictim.sub(beforeBalanceAbraveVictim)).to.equal(depositAmount);
         expect(beforeBalanceUser1.sub(afterBalanceUser1)).to.equal(depositAmount);
 
-        expect(await agraveVictim.amounts(addr1.address)).to.equal(depositAmount);
+        expect(await abraveVictim.amounts(addr1.address)).to.equal(depositAmount);
     });
 
-    it("Test3: Ligit user can withdraw AgraveToken from AgraveVictim. ", async function () {
-        const beforeBalanceAgraveVictim = await agraveToken.balanceOf(agraveVictim.address);
-        const beforeBalanceUser1 = await agraveToken.balanceOf(addr1.address);
+    it("Test3: Ligit user can withdraw AbraveToken from AbraveVictim. ", async function () {
+        const beforeBalanceAbraveVictim = await abraveToken.balanceOf(abraveVictim.address);
+        const beforeBalanceUser1 = await abraveToken.balanceOf(addr1.address);
 
-        //await agraveToken.connect(addr1).increaseAllowance(agraveVictim.address, depositAmount);
-        //await agraveVictim.connect(addr1).deposit(depositAmount);
+        //await abraveToken.connect(addr1).increaseAllowance(abraveVictim.address, depositAmount);
+        //await abraveVictim.connect(addr1).deposit(depositAmount);
 
-        await agraveVictim.connect(addr1).withdraw(addr1.address);
+        await abraveVictim.connect(addr1).withdraw(addr1.address);
 
-        const afterBalanceAgraveVictim = await agraveToken.balanceOf(agraveVictim.address);
-        const afterBalanceUser1 = await agraveToken.balanceOf(addr1.address);
+        const afterBalanceAbraveVictim = await abraveToken.balanceOf(abraveVictim.address);
+        const afterBalanceUser1 = await abraveToken.balanceOf(addr1.address);
 
-        expect(beforeBalanceAgraveVictim.sub(afterBalanceAgraveVictim)).to.equal(depositAmount);
+        expect(beforeBalanceAbraveVictim.sub(afterBalanceAbraveVictim)).to.equal(depositAmount);
         expect(afterBalanceUser1.sub(beforeBalanceUser1)).to.equal(depositAmount);
 
-        expect(await agraveVictim.amounts(addr1.address)).to.equal(0);
+        expect(await abraveVictim.amounts(addr1.address)).to.equal(0);
     });
 
 
-    it("Attack: Attacker can withdraw more AgraveToken from AgraveVictim than he deposits.", async function () {
-        const beforeBalanceAgraveVictim = await agraveToken.balanceOf(agraveVictim.address);
-        const beforeBalanceAttacker = await agraveToken.balanceOf(agraveAttacker.address);
+    it("Attack: Attacker can withdraw more AbraveToken from AbraveVictim than he deposits.", async function () {
+        const beforeBalanceAbraveVictim = await abraveToken.balanceOf(abraveVictim.address);
+        const beforeBalanceAttacker = await abraveToken.balanceOf(abraveAttacker.address);
 
         console.log("beforeBalanceAttacker: " + beforeBalanceAttacker.toString());
-        console.log("beforeBalanceAgraveVictim: " + beforeBalanceAgraveVictim.toString());
+        console.log("beforeBalanceAbraveVictim: " + beforeBalanceAbraveVictim.toString());
 
-        // increase allowance[attacker => agraveAttacker contract]
-        await agraveToken.connect(attacker).increaseAllowance(agraveAttacker.address, depositAmount);
+        // increase allowance[attacker => abraveAttacker contract]
+        await abraveToken.connect(attacker).increaseAllowance(abraveAttacker.address, depositAmount);
 
-        // agraveAttacker contract will spend attacker's AGT in attack()
-        await agraveAttacker.connect(attacker).attack(depositAmount);
+        // abraveAttacker contract will spend attacker's AGT in attack()
+        await abraveAttacker.connect(attacker).attack(depositAmount);
 
-        const afterBalanceAgraveVictim = await agraveToken.balanceOf(agraveVictim.address);
-        const afterBalanceAttacker = await agraveToken.balanceOf(agraveAttacker.address);
+        const afterBalanceAbraveVictim = await abraveToken.balanceOf(abraveVictim.address);
+        const afterBalanceAttacker = await abraveToken.balanceOf(abraveAttacker.address);
 
         console.log("afterBalanceAttacker: " + afterBalanceAttacker.toString());
-        console.log("afterBalanceAgraveVictim: " + afterBalanceAgraveVictim.toString());
+        console.log("afterBalanceAbraveVictim: " + afterBalanceAbraveVictim.toString());
 
         // About `above` and `below`:
         // https://ethereum-waffle.readthedocs.io/en/latest/matchers.html#bignumbers
         expect(afterBalanceAttacker.sub(beforeBalanceAttacker)).to.above(depositAmount);
         // ^ attacker gets more than he deposit
-        expect(afterBalanceAgraveVictim).to.below(beforeBalanceAgraveVictim.sub(depositAmount));
+        expect(afterBalanceAbraveVictim).to.below(beforeBalanceAbraveVictim.sub(depositAmount));
         // ^ victim losses more than attacker should take
     });
 

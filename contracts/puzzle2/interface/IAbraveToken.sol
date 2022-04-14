@@ -20,7 +20,7 @@ Glad to prepare and present the materials for Game Day Remix in DevConnect Amste
 
 pragma solidity ^0.8.4;
 
-interface IAgraveToken {
+interface IAbraveToken {
     function balanceOf(address owner) external view returns (uint256);
 
     function transfer(address recipient, uint256 amount) external;

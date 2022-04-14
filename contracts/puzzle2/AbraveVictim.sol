@@ -19,17 +19,17 @@ Glad to prepare and present the materials for Game Day Remix in DevConnect Amste
 */
 
 pragma solidity ^0.8.4;
-import "./interface/IAgraveVictim.sol";
-import "./interface/IAgraveToken.sol";
+import "./interface/IAbraveVictim.sol";
+import "./interface/IAbraveToken.sol";
 import "@openzeppelin/contracts/token/ERC777/IERC777Recipient.sol";
 
-contract AgraveVictim is IAgraveVictim, IERC777Recipient {
-    IAgraveToken token;
+contract AbraveVictim is IAbraveVictim, IERC777Recipient {
+    IAbraveToken token;
     mapping(address => uint256) public amounts;
 
-    constructor(IAgraveToken token_address) {
+    constructor(IAbraveToken token_address) {
         token = token_address;
-        // need some intial fund (in terms of AgraveToken) to be exploit
+        // need some intial fund (in terms of AbraveToken) to be exploit
     }
 
     function tokensReceived(

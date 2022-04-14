@@ -19,20 +19,9 @@ Glad to prepare and present the materials for Game Day Remix in DevConnect Amste
 */
 
 pragma solidity ^0.8.4;
-import "./ERC777.sol";
-import "./interface/IAgraveToken.sol";
 
-contract AgraveToken is ERC777 {
-    // Please refer to the URL for a detailed ERC-777 intro
-    // https://docs.openzeppelin.com/contracts/3.x/api/token/erc777
-    constructor(uint256 initialSupply)
-        ERC777("AgraveToken", "AGT")
-    {
-        _mint(msg.sender, initialSupply);
-    }
+interface IAbraveVictim {
+    function deposit(uint256 amount) external;
 
-    function buy() external payable {
-        // let's do a 1:1 exchange from eth to agraveToken
-        _mint(msg.sender, msg.value);
-    }
+    function withdraw(address recipient) external;
 }
