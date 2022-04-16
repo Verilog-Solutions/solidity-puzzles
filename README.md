@@ -47,4 +47,18 @@ Similarly, Each puzzle has an `test/puzzle[1-3].test.js` hardhat test file. The 
 
 ## With Remix
 
+### Run Hardhat Test Cases in Remix
+
+1. Open [remix](https://remix.ethereum.org/);
+2. Enable `dGit` plugin in the `PLUGIN MANAGER` tab;
+3. In `dGit` > `CLONE, PUSH, PULL & REMOTES` > `CLONE`, enter URL to this github repo, then click `clone`; 
+4. Go to `FILE EXPLORERS` > drag down `workspace` > select the latest workspace,
+    1. for each `*.sol` file in `contracts/` folder:
+        1. Go to `SOLIDITY COMPILER`, compile `*.sol`.
+5. Go to `FILE EXPLORERS` > `test/` folder,
+    1. for each `*.test.js` file in `test/` folder
+        1.Right click `*.test.js` and choose `run`.
+
+### Play with Recordings
+
 TBD
