@@ -14,7 +14,7 @@
                                                
 Verilog Solutions Inc. https://www.verilog.solutions
 Verilog is a full-stack web3 security firm, covering smart contract auditing, 
-validator opertions, venture investment, and incubation.
+validator operations, venture investment, and incubation.
 Glad to prepare and present the materials for Game Day Remix in DevConnect Amsterdam!
 */
 
@@ -64,8 +64,8 @@ describe("Puzzle 3", function () {
 
     beforeEach(async function () {
         // await user1, attacker buy some PensionToken
-        await pensionToken.connect(addr1).buy({value: depositAmount});
-        await pensionToken.connect(attacker).buy({value: depositAmount});
+        await pensionToken.connect(addr1).buy({ value: depositAmount });
+        await pensionToken.connect(attacker).buy({ value: depositAmount });
     });
 
     it("Test1: PensionVictim should be initialize with proper initial fund (in PensionToken). ", async function () {
@@ -115,8 +115,8 @@ describe("Puzzle 3", function () {
         // increase allowance[attacker => pensionAttacker contract]
         // and deposit PST
         await pensionToken.connect(attacker).increaseAllowance(pensionAttacker.address, depositAmount);
-        
-        
+
+
         await pensionAttacker.connect(attacker).attack(depositAmount);
 
         // pass the malicious distributor (pensionAttacker)

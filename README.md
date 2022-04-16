@@ -15,7 +15,7 @@
                                                
 Verilog Solutions Inc. https://www.verilog.solutions
 Verilog is a full-stack web3 security firm, covering smart contract auditing, 
-validator opertions, venture investment, and incubation.
+validator operations, venture investment, and incubation.
 Glad to prepare and present the materials for Game Day Remix in DevConnect Amsterdam!
 ```
 
