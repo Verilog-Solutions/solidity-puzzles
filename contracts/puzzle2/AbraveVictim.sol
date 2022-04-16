@@ -24,7 +24,7 @@ import "./interface/IAbraveToken.sol";
 import "@openzeppelin/contracts/token/ERC777/IERC777Recipient.sol";
 
 contract AbraveVictim is IAbraveVictim, IERC777Recipient {
-    IAbraveToken token;
+    IAbraveToken public token;
     mapping(address => uint256) public amounts;
 
     constructor(IAbraveToken token_address) {

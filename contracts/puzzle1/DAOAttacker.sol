@@ -22,7 +22,7 @@ pragma solidity ^0.8.4;
 import "./interface/IDAOVictim.sol";
 
 contract DAOAttacker {
-    IDAOVictim victim;
+    IDAOVictim public victim;
 
     constructor(IDAOVictim victim_address) {
         victim = victim_address;

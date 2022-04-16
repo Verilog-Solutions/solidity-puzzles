@@ -24,7 +24,7 @@ import "./interface/IPensionDistributor.sol";
 import "./interface/IPensionToken.sol";
 
 contract PensionVictim is IPensionVictim {
-    IPensionToken token;
+    IPensionToken public token;
     mapping(address => uint256) public amounts;
 
     constructor(IPensionToken token_address) {

@@ -26,7 +26,7 @@ import "./interface/IPensionToken.sol";
 import "./helper/Whitelistable.sol";
 
 contract PensionDistributor is IPensionDistributor, Ownable, Whitelistable {
-    IPensionToken token;
+    IPensionToken public token;
 
     constructor(IPensionToken token_address) {
         token = token_address;
