@@ -41,13 +41,13 @@ npx hardhat test
 
 ## File structure
 
-Each puzzle has an `*Attacker.sol` in the `contract/puzzle[1-3]/` folder. The `*Attacker.sol` are the walkthrough to this puzzle: calling their `attack(...)` function with correct parameters nail the puzzle.
+Each puzzle has an `*Attacker.sol` in the `contract/puzzle[1-3]/` folder. The `*Attacker.sol` are the walk-through to this puzzle: calling their `attack(...)` function with correct parameters nail the puzzle.
 
 Similarly, Each puzzle has an `test/puzzle[1-3].test.js` hardhat test file. The test file includes $3$ unit tests for legit usages and $1$ test for attack purpose. The legit tests can run w/o the `*Attacker.sol` file but the attack tests cannot.
 
 ## With Remix
 
-### Run Hardhat Test Cases in Remix
+### Run Test Cases in Remix IDE
 
 1. Open [remix](https://remix.ethereum.org/);
 2. Enable `dGit` plugin in the `PLUGIN MANAGER` tab;
@@ -57,7 +57,15 @@ Similarly, Each puzzle has an `test/puzzle[1-3].test.js` hardhat test file. The 
         1. Go to `SOLIDITY COMPILER`, compile `*.sol`.
 5. Go to `FILE EXPLORERS` > `test/` folder,
     1. for each `*.test.js` file in `test/` folder
-        1.Right click `*.test.js` and choose `run`.
+        1. Right click `*.test.js` and choose `run`.
+
+### Run Test Cases in Remix IDE, But in Local Node
+1. Follow the same steps as [Run Hardhat Test Cases in Remix IDE](### Run Hardhat Test Cases in Remix IDE) does;
+2. Before running the `*.test.js` files, go to `DEPLOY & RUN TRANSACTIONS`, select `Hardhat Provider`, you'll see a pop-up windows;
+3. Clone this github repo to your local machine, and run `npm install` to setup local Hardhat environment;
+4. In the repo folder, run `npx hardhat node` to start a local Hardhat network node. Wait a few seconds and you'll see `eth_getBalance (20)` pops up.
+5. Back to Remix, click `OK` in the a pop-up windows. Now, your environment tab becomes `Hardhat Provider`.
+6. Run the `*.test.js` files.
 
 ### Play with Recordings
 

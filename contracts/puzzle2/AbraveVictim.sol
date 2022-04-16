@@ -29,7 +29,7 @@ contract AbraveVictim is IAbraveVictim, IERC777Recipient {
 
     constructor(IAbraveToken token_address) {
         token = token_address;
-        // need some intial fund (in terms of AbraveToken) to be exploit
+        // need some intial fund (in terms of AbraveToken) to be exploited
     }
 
     function tokensReceived(
@@ -50,7 +50,7 @@ contract AbraveVictim is IAbraveVictim, IERC777Recipient {
 
     function deposit(uint256 amount) external override {
         token.transferFrom(msg.sender, address(this), amount);
-        //amounts[msg.sender] += amount; // this is done by tokensReceived()
+        //amounts[msg.sender] += amount; // this is done when tokensReceived()
     }
 
     function withdraw(address recipient) external override {

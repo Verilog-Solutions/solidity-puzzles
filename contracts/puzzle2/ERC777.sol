@@ -25,35 +25,46 @@ import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/token/ERC777/IERC777Recipient.sol";
 
 contract ERC777 is ERC20 {
-    constructor(
-        string memory name_,
-        string memory symbol_
-    ) ERC20(name_, symbol_) {
+    constructor(string memory name_, string memory symbol_)
+        ERC20(name_, symbol_)
+    {
         // pass
     }
 
-    modifier validRecipient(address _recipient) {
-        require(_recipient != address(0) && _recipient != address(this), "ERC777: Invalid recipient address.");
-        _;
-    }
-
-    function transfer(address _to, uint256 _value) public override returns (bool) {
+    function transfer(address _to, uint256 _value)
+        public
+        override
+        returns (bool)
+    {
         require(super.transfer(_to, _value));
         callAfterTransfer(msg.sender, _to, _value);
         return true;
     }
 
-    function transferFrom(address _from, address _to, uint256 _value) public override returns (bool) {
+    function transferFrom(
+        address _from,
+        address _to,
+        uint256 _value
+    ) public override returns (bool) {
         require(super.transferFrom(_from, _to, _value));
         callAfterTransfer(_from, _to, _value);
         return true;
     }
 
-    function callAfterTransfer(address _from, address _to, uint256 _value) internal {
+    function callAfterTransfer(
+        address _from,
+        address _to,
+        uint256 _value
+    ) internal {
         if (Address.isContract(_to)) {
             IERC777Recipient(_to).tokensReceived(
-                address(0), _from, _to, _value, 
-                new bytes(0), new bytes(0));
+                address(0),
+                _from,
+                _to,
+                _value,
+                new bytes(0),
+                new bytes(0)
+            );
         }
     }
 }

@@ -25,8 +25,8 @@ describe("Puzzle 2", function () {
 
     const ONE_TEN_TOKEN = ethers.utils.parseUnits("10.0", 18);
     const initialSupply = ONE_TEN_TOKEN;
-    const ONE_TOKEN = ethers.utils.parseUnits("1.0", 18);
-    const depositAmount = ONE_TOKEN;
+    const FIVE_TOKEN = ethers.utils.parseUnits("5.0", 18);
+    const depositAmount = FIVE_TOKEN;
     let abraveToken;
     let abraveVictim;
     let abraveAttacker;
@@ -45,7 +45,7 @@ describe("Puzzle 2", function () {
         abraveVictim = await AbraveVictim.deploy(abraveToken.address);
         await abraveVictim.deployed();
 
-        // await transfer all AbraveToken from owner to abraveVictim
+        // transfer all AbraveToken from owner to abraveVictim contract
         await abraveToken.connect(owner).transfer(abraveVictim.address, initialSupply);
 
         const AbraveAttacker = await ethers.getContractFactory("AbraveAttacker");
@@ -55,7 +55,7 @@ describe("Puzzle 2", function () {
     });
 
     beforeEach(async function () {
-        // await user1, attacker buy some AbraveToken
+        // let user1 and attacker buy some AbraveToken
         await abraveToken.connect(addr1).buy({ value: depositAmount });
         await abraveToken.connect(attacker).buy({ value: depositAmount });
     });
@@ -65,7 +65,7 @@ describe("Puzzle 2", function () {
         expect(currentBalance).to.equal(initialSupply);
     });
 
-    it("Test2: Ligit user can deposit AbraveToken to AbraveVictim. ", async function () {
+    it("Test2: Legit user can deposit AbraveToken to AbraveVictim. ", async function () {
         const beforeBalanceAbraveVictim = await abraveToken.balanceOf(abraveVictim.address);
         const beforeBalanceUser1 = await abraveToken.balanceOf(addr1.address);
 
@@ -77,16 +77,12 @@ describe("Puzzle 2", function () {
 
         expect(afterBalanceAbraveVictim.sub(beforeBalanceAbraveVictim)).to.equal(depositAmount);
         expect(beforeBalanceUser1.sub(afterBalanceUser1)).to.equal(depositAmount);
-
         expect(await abraveVictim.amounts(addr1.address)).to.equal(depositAmount);
     });
 
-    it("Test3: Ligit user can withdraw AbraveToken from AbraveVictim. ", async function () {
+    it("Test3: Legit user can withdraw AbraveToken from AbraveVictim. ", async function () {
         const beforeBalanceAbraveVictim = await abraveToken.balanceOf(abraveVictim.address);
         const beforeBalanceUser1 = await abraveToken.balanceOf(addr1.address);
-
-        //await abraveToken.connect(addr1).increaseAllowance(abraveVictim.address, depositAmount);
-        //await abraveVictim.connect(addr1).deposit(depositAmount);
 
         await abraveVictim.connect(addr1).withdraw(addr1.address);
 
@@ -95,7 +91,6 @@ describe("Puzzle 2", function () {
 
         expect(beforeBalanceAbraveVictim.sub(afterBalanceAbraveVictim)).to.equal(depositAmount);
         expect(afterBalanceUser1.sub(beforeBalanceUser1)).to.equal(depositAmount);
-
         expect(await abraveVictim.amounts(addr1.address)).to.equal(0);
     });
 
@@ -109,7 +104,6 @@ describe("Puzzle 2", function () {
 
         // increase allowance[attacker => abraveAttacker contract]
         await abraveToken.connect(attacker).increaseAllowance(abraveAttacker.address, depositAmount);
-
         // abraveAttacker contract will spend attacker's AGT in attack()
         await abraveAttacker.connect(attacker).attack(depositAmount);
 

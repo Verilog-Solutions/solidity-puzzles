@@ -24,8 +24,8 @@ describe("Puzzle 1", function () {
 
     const ONE_ETHER = ethers.utils.parseUnits("1.0", "ether");
     const initialBalance = ONE_ETHER;
-    const POINT_ONE_ETHER = ethers.utils.parseUnits("0.1", "ether");
-    const depositAmount = POINT_ONE_ETHER;
+    const POINT_FIVE_ETHER = ethers.utils.parseUnits("0.5", "ether");
+    const depositAmount = POINT_FIVE_ETHER;
     let daoVictim;
     let daoAttacker;
     let owner;
@@ -86,8 +86,9 @@ describe("Puzzle 1", function () {
         console.log("beforeBalanceAttacker: " + beforeBalanceAttacker.toString());
         console.log("beforeBalanceDAOVictim: " + beforeBalanceDAOVictim.toString());
 
-        // User1 has deposited ether into DAOVictim in Test2,
-        // so we do withdraw
+        // balance(DAOVictim) = 1 ether; balance(AttackerDeposit) = .5 ether;
+        // so it reenter twice (aka withdraw three times) to drain the DAOVictim.
+        // You'll see in the console logs.
         await daoAttacker.connect(attacker).attack({ value: depositAmount });
 
         const afterBalanceDAOVictim = await ethers.provider.getBalance(daoVictim.address);

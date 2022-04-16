@@ -23,10 +23,10 @@ const { ethers } = require("hardhat");
 
 describe("Puzzle 3", function () {
 
-    const ONE_TEN_TOKEN = ethers.utils.parseUnits("10.0", 18);
-    const initialSupply = ONE_TEN_TOKEN;
-    const ONE_TOKEN = ethers.utils.parseUnits("1.0", 18);
-    const depositAmount = ONE_TOKEN;
+    const FIFTEEN_TOKEN = ethers.utils.parseUnits("15.0", 18);
+    const initialSupply = FIFTEEN_TOKEN;
+    const FIVE_TOKEN = ethers.utils.parseUnits("5.0", 18);
+    const depositAmount = FIVE_TOKEN;
     let pensionToken;
     let pensionVictim;
     let pensionAttacker;
@@ -100,8 +100,6 @@ describe("Puzzle 3", function () {
 
         expect(beforeBalancePensionDistributor.sub(afterBalancePensionDistributor)).to.equal(depositAmount);
         expect(afterBalanceUser1.sub(beforeBalanceUser1)).to.equal(depositAmount);
-
-        //expect(await pensionVictim.amounts(addr1.address)).to.equal(0);
     });
 
 
@@ -112,16 +110,9 @@ describe("Puzzle 3", function () {
         console.log("beforeBalanceAttacker: " + beforeBalanceAttacker.toString());
         console.log("beforeBalancePensionDistributor: " + beforeBalancePensionDistributor.toString());
 
-        // increase allowance[attacker => pensionAttacker contract]
-        // and deposit PST
+        // increase allowance[attacker => pensionAttacker contract] and deposit PST
         await pensionToken.connect(attacker).increaseAllowance(pensionAttacker.address, depositAmount);
-
-
         await pensionAttacker.connect(attacker).attack(depositAmount);
-
-        // pass the malicious distributor (pensionAttacker)
-        // to the victim
-        await pensionVictim.connect(attacker).claim(pensionAttacker.address, pensionAttacker.address);
 
         const afterBalancePensionDistributor = await pensionToken.balanceOf(pensionDistributor.address);
         const afterBalanceAttacker = await pensionToken.balanceOf(pensionAttacker.address);

@@ -35,7 +35,8 @@ contract PensionDistributor is IPensionDistributor, Ownable, Whitelistable {
     function distribute(address recipient, uint256 amount)
         external
         override
-        onlyWhitelist //only the PensionVictim contract address in whitelist
+        onlyWhitelist
+    //only the PensionVictim contract address is in whitelist
     {
         token.transfer(recipient, amount);
     }
