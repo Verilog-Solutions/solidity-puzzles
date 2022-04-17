@@ -47,7 +47,7 @@ Similarly, Each puzzle has an `test/puzzle[1-3].test.js` hardhat test file. The 
 
 ## With Remix
 
-### Run Test Cases in Remix IDE
+### Run Test Cases
 
 > Beware: Running tests in Remix IDE eats your RAM (~1.5 GB). Consider running it with a local node.
 
@@ -61,14 +61,26 @@ Similarly, Each puzzle has an `test/puzzle[1-3].test.js` hardhat test file. The 
     1. for each `*.test.js` file in `test/` folder
         1. Right click `*.test.js` and choose `run`.
 
-### Run Test Cases in Remix IDE, But in Local Node
-1. Follow the same steps as [Run Hardhat Test Cases in Remix IDE](### Run Hardhat Test Cases in Remix IDE) does;
+### Run Test Cases, But in Local Node
+1. Follow the steps in previous section to set up the workspace;
 2. Before running the `*.test.js` files, go to `DEPLOY & RUN TRANSACTIONS`, select `Hardhat Provider`, you'll see a pop-up windows;
-3. Clone this github repo to your local machine, and run `npm install` to setup local Hardhat environment;
-4. In the repo folder, run `npx hardhat node` to start a local Hardhat network node. Wait a few seconds and you'll see `eth_getBalance (20)` pops up.
+3. Clone this github repo to your **local machine**, and run `npm install` to setup local Hardhat environment;
+4. In the repo folder, run `npx hardhat node` to start a **local** Hardhat node. Wait a few seconds and you'll see `eth_getBalance (20)` pops up.
 5. Back to Remix, click `OK` in the a pop-up windows. Now, your environment tab becomes `Hardhat Provider`.
 6. Run the `*.test.js` files.
 
 ### Play with Recordings
-
-TBD
+1. Follow the steps in previous section to set up the workspace and the local node;
+2. Open a `record/puzzle*.json` file, make it the active tab in Remix;
+3. (Optional) According to your network, change the account address (the `accounts` attribute in the JSON file) to the test address.
+    1. Hardhat user: No changes needed - the default address is the test address.
+    2. Remix JSVM user: Please change it to
+``` json
+"accounts": {
+    "account{0}": "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",
+    "account{1}": "0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2"
+}
+```
+    3. Ethereum testnets user: Change it to your own accounts.
+4. Go to `DEPLOY & RUN TRANSACTIONS` > `Transactions recorded`, click the `play` button.
+5. Now you can find a series transactions pop up automatically in Remix console.
