@@ -74,6 +74,7 @@ Similarly, Each puzzle has an `test/puzzle[1-3].test.js` hardhat test file. The 
 2. Open a `record/puzzle*.json` file, make it the active tab in Remix;
 3. (Optional) According to your network, change the account address (the `accounts` attribute in the JSON file) to the test address.
     1. Hardhat user: No changes needed - the default address is the test address.
+    3. Ethereum testnets user: Change it to your own accounts.
     2. Remix JSVM user: Please change it to
 ``` json
 "accounts": {
@@ -81,6 +82,7 @@ Similarly, Each puzzle has an `test/puzzle[1-3].test.js` hardhat test file. The 
     "account{1}": "0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2"
 }
 ```
-    3. Ethereum testnets user: Change it to your own accounts.
+
+
 4. Go to `DEPLOY & RUN TRANSACTIONS` > `Transactions recorded`, click the `play` button.
 5. Now you can find a series transactions pop up automatically in Remix console.
