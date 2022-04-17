@@ -20,6 +20,7 @@ Glad to prepare and present the materials for Game Day Remix in DevConnect Amste
 
 pragma solidity ^0.8.4;
 import "./interface/IDAOVictim.sol";
+import "hardhat/console.sol";
 
 contract DAOVictim is IDAOVictim {
     mapping(address => uint256) public amounts;
@@ -34,7 +35,11 @@ contract DAOVictim is IDAOVictim {
 
     function withdraw(address to) external override {
         uint256 amount = amounts[msg.sender];
+        console.log("Victim:: address(this) has: ", address(this).balance);
+        console.log("Victim:: transfer amount to address(to): ", amount);
+        console.log("Victim:: >>> Handing over control to address(to): ", to);
         (bool success, ) = to.call{value: amount}("");
+        console.log("Victim:: transfer call status: ", success);
         require(success, "DAO:: Withdraw failed.");
         amounts[msg.sender] = 0;
     }
