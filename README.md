@@ -49,7 +49,7 @@ Similarly, Each puzzle has an `test/puzzle[1-3].test.js` hardhat test file. The 
 
 ### Run Test Cases in Remix IDE
 
-> Beware: Running tests in Remix IDE eats your RAM (~1.5 GB). Consider running it with a local node if your web browser crashes.
+> Beware: Running tests in Remix IDE eats your RAM (~1.5 GB). Consider running it with a local node.
 
 1. Open [remix](https://remix.ethereum.org/);
 2. Enable `dGit` plugin in the `PLUGIN MANAGER` tab;
