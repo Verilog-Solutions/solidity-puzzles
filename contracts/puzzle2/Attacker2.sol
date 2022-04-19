@@ -20,6 +20,9 @@ import "@openzeppelin/contracts/token/ERC777/IERC777Recipient.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./interface/IVictim.sol";
 
+/// @title Attacker2
+/// @notice Attacker contract for puzzle 2
+/// @author Verilog Solutions
 contract Attacker2 is IERC777Recipient {
 	IVictim public victim;
 	IERC20 public token;

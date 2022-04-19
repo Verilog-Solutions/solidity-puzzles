@@ -18,11 +18,14 @@ Glad to prepare and present the materials for Game Day Remix in DevConnect Amste
 pragma solidity 0.8.6;
 import "./interface/IVictim.sol";
 
+/// @title Victim1
+/// @notice Victim contract for puzzle 2
+/// @author Verilog Solutions
 contract Victim1 is IVictim {
 	mapping(address => uint256) public amounts;
 
+	//payable constructor. send some ether to this contract during construction
 	constructor() payable {
-		// need some intial fund to be exploit
 	}
 
 	function deposit() external payable override {
@@ -32,7 +35,7 @@ contract Victim1 is IVictim {
 	function withdraw(address to) external override {
 		uint256 amount = amounts[msg.sender];
 		(bool success, ) = to.call{ value: amount }("");
-		require(success, "DAO:: Withdraw failed.");
+		require(success, "Victim1:: Withdraw failed.");
 		amounts[msg.sender] = 0;
 	}
 }

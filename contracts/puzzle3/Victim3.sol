@@ -20,6 +20,9 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./interface/IVictim.sol";
 import "./interface/IDistributor.sol";
 
+/// @title Victim3
+/// @notice Victim contract for puzzle 3
+/// @author Verilog Solutions
 contract Victim3 is IVictim {
 	IERC20 public token;
 	mapping(address => uint256) public amounts;

@@ -22,6 +22,9 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { Whitelistable } from "./Whitelistable.sol";
 import { IDistributor } from "../interface/IDistributor.sol";
 
+/// @title Distributor
+/// @notice A Distributor to distribite tokens
+/// @author Verilog Solutions
 contract Distributor is IDistributor, Ownable, Whitelistable {
 	IERC20 public token;
 

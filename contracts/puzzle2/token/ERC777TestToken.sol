@@ -21,7 +21,9 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/token/ERC777/IERC777Recipient.sol";
 
+/// @title ERC777TestToken
 /// @notice simple version of ERC777. Do not use it in productions
+/// @author Verilog Solutions
 contract ERC777TestToken is ERC20 {
 	constructor(uint256 initialSupply) ERC20("ERC777 Test Token", "Token") {
 		// mint some initial supply
@@ -30,7 +32,7 @@ contract ERC777TestToken is ERC20 {
 
 	// buy token with ether
 	function buy(address to) external payable {
-		// let's do a 1:1 exchange from eth to
+		// let's do a 1:1 exchange from eth to token
 		_mint(to, msg.value);
 	}
 

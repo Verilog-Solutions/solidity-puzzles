@@ -18,6 +18,9 @@ Glad to prepare and present the materials for Game Day Remix in DevConnect Amste
 pragma solidity 0.8.6;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
+/// @title Token
+/// @notice Test token. Do not use it in productions
+/// @author Verilog Solutions
 contract Token is ERC20 {
 	constructor(uint256 initialSupply) ERC20("TEST Token", "T-Token") {
 		_mint(msg.sender, initialSupply);
