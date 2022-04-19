@@ -18,9 +18,11 @@ validator operations, venture investment, and incubation.
 Glad to prepare and present the materials for Game Day Remix in DevConnect Amsterdam!
 */
 
-pragma solidity ^0.8.4;
+pragma solidity 0.8.6;
+import "./IDistributor.sol";
 
+interface IVictim {
+	function deposit(uint256 amount) external;
 
-interface IPensionDistributor {
-    function distribute(address recipient, uint256 amount) external;
+	function claim(IDistributor distributor, address recipient) external;
 }

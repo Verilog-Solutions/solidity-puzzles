@@ -41,7 +41,7 @@
 2. pensionDistributor = PensionDistributor.deploy(pensionToken.address);
 3. pensionDistributor.connect(owner).addToWhitelist(pensionVictim.address);
 4. pensionToken.connect(owner).transfer(pensionDistributor.address, initialSupply);
-5. pensionAttacker = PensionAttacker.deploy(
+5. pensionAttacker = Attacker.deploy(
     pensionVictim.address, pensionToken.address, pensionDistributor.address);
 6. pensionToken.connect(addr1).buy({ value: depositAmount });
 7. pensionToken.connect(attacker).buy({ value: depositAmount });
