@@ -52,6 +52,20 @@ We record the transactions which includes the contract deployments and attack ex
 
 Open a scenario file (make it the active tab inside Remix) and go to  `DEPLOY & RUN TRANSACTIONS` > `Transactions recorded` inside remix and click the play button. You can find a series transactions pop up automatically in remix console.
 
+(Optional) According to your network, change the account address (the `accounts` attribute in the JSON file) to the test address.
+    1. Remix JSVM user: No changes needed - the default address is the JSVM test address.
+    3. Ethereum testnets user: Change it to your own accounts.
+    2. Hardhat user: Please refer to the `DEPLOY & RUN TRANSACTIONS` > `Account` list for the test accounts.
+
+The format is like
+```json
+"accounts": {
+    "account{0}": "insert_wallet_address0_here",
+    "account{1}": "insert_wallet_address1_here"
+}
+```
+
+
 ### 3 Explore the Remix Debugger
 
 Inside the remix console, you can see all the transactions. Pick one transaction and click the `debug` button. 
