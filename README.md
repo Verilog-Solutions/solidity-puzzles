@@ -50,7 +50,7 @@ We record the transactions which includes the contract deployments and attack ex
 
 ### 3 Explore the Remix Debugger
 
-Inside the remix console, you can see all the transactions. Pick one transaction and click the `debug` button. 
+Inside the remix console, you can see all the transactions. Pick one transaction and click the `Debug` button. 
 
 You can pick the attacking transaction and try debugging it and see what happens exactly inside the exploits.
 
@@ -64,8 +64,8 @@ We have prepared two kinds of tests. Try run the tests and fix bugs.
 
  2.  javascripts unit tests which can be run both on remix and hardhat (`tests/js_tests/*`)
 
-     - run on remix. 
-
+     - run on remix. (make sure you compiled all the contracts first)
+      
        Just right click test file at the file explorer and choose `run`. 
 
      - run with hardhat locally with `yarn hardhat test`
