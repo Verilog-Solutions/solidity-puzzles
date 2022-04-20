@@ -9,5 +9,7 @@ module.exports = {
 	paths: {
 		sources: "./contracts",
 		tests: "./tests",
+		
+		
 	},
 };

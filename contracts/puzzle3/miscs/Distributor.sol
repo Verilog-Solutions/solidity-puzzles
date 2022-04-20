@@ -36,7 +36,7 @@ contract Distributor is IDistributor, Ownable, Whitelistable {
 		external
 		override
 		onlyWhitelist
-	//only the PensionVictim contract address is in whitelist
+	//only the Victim contract address is in whitelist
 	{
 		token.transfer(recipient, amount);
 	}

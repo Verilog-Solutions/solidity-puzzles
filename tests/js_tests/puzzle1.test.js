@@ -17,6 +17,9 @@ Glad to prepare and present the materials for Game Day Remix in DevConnect Amste
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
+// import {""} from "../contracts/puzzle1/artifacts/Attacker1.json";
+// import {} from "../contracts/puzzle1/artifacts/Victim1.json";
+
 describe("Puzzle 1", function () {
 	const ONE_ETHER = ethers.utils.parseUnits("1.0", "ether");
 	const initialBalance = ONE_ETHER;
