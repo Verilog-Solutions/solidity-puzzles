@@ -26,15 +26,14 @@ import "remix_tests.sol";
 import "remix_accounts.sol";
 // <import file to test>
 import "hardhat/console.sol";
-import "../contracts/puzzle1/DAOAttacker.sol";
-import "../contracts/puzzle1/DAOVictim.sol";
-
-// import "../contracts/puzzle1/interface/IDAOVictim.sol";
+import "../../contracts/puzzle1/Attacker1.sol";
+import "../../contracts/puzzle1/Victim1.sol";
+import "../../contracts/puzzle2/token/ERC777TestToken.sol";
 
 // File name has to end with '_test.sol', this file can contain more than one testSuite contracts
 contract puzzle1_test {
-	DAOVictim victim;
-	DAOAttacker attacker;
+	Victim1 victim;
+	Attacker1 attacker;
 
 	/// 'beforeAll' runs before all other tests
 	/// More special functions are: 'beforeEach', 'beforeAll', 'afterEach' & 'afterAll'
@@ -44,13 +43,13 @@ contract puzzle1_test {
 		// <instantiate contract>
 
 		console.log("address account0", msg.sender);
-		victim = new DAOVictim{ value: msg.value }(); // initiate DAOVictim with initial funds
-		attacker = new DAOAttacker(victim);
+		victim = new Victim1{ value: msg.value }(); // initiate Victim1 with initial funds
+		attacker = new Attacker1(address(victim));
 
 		console.log("attacker balance", address(attacker).balance);
 	}
 
-	/// Test1: DAOVictim should be initialize with proper initial fund.
+	/// Test1: Victim1 should be initialize with proper initial fund.
 	function test_DAOVictim_Initalize() public {
 		Assert.ok(
 			address(victim).balance == 1 ether,
@@ -58,7 +57,7 @@ contract puzzle1_test {
 		);
 	}
 
-	/// Attack: Attacker can withdraw more ether from DAOVictim.
+	/// Attack: Attacker can withdraw more ether from Victim1.
 	/// #sender: account-1
 	/// #value: 500000000000000000
 	function attack() public payable {

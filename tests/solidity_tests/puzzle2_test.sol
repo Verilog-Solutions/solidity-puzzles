@@ -26,15 +26,15 @@ import "remix_tests.sol";
 import "remix_accounts.sol";
 // <import file to test>
 import "hardhat/console.sol";
-import "../contracts/puzzle2/AbraveToken.sol";
-import "../contracts/puzzle2/AbraveVictim.sol";
-import "../contracts/puzzle2/AbraveAttacker.sol";
+import "../../contracts/puzzle2/token/ERC777TestToken.sol";
+import "../../contracts/puzzle2/Victim2.sol";
+import "../../contracts/puzzle2/Attacker2.sol";
 
 // File name has to end with '_test.sol', this file can contain more than one testSuite contracts
 contract puzzle2_test {
-	AbraveToken token;
-	AbraveVictim victim;
-	AbraveAttacker attacker;
+	ERC777TestToken token;
+	Victim2 victim;
+	Attacker2 attacker;
 
 	/// 'beforeAll' runs before all other tests
 	/// More special functions are: 'beforeEach', 'beforeAll', 'afterEach' & 'afterAll'
@@ -42,18 +42,19 @@ contract puzzle2_test {
 	/// #value: 100
 	function beforeAll() public payable {
 		// <instantiate contract>
-		token = new AbraveToken(0); // abrave token is minted to account-0
+		token = new ERC777TestToken(0); // abrave token is minted to account-0
 
-		victim = new AbraveVictim(IAbraveToken(address(token)));
-		attacker = new AbraveAttacker(victim, IAbraveToken(address(token)));
+		victim = new Victim2(address(token));
+		attacker = new Attacker2(address(victim), address(token));
 	}
 
-	/// Attacker: Attacker can withdraw more AbraveToken from AbraveVictim than he deposits
+	/// Attacker: Attacker can withdraw more ERC777TestToken from Victim2 than he deposits
 	/// #sender: account-0
-	/// #value: 0
-	function attack() public {
+	/// #value: 11000000000000000000
+	function attack() payable public {
 		// deposit 10 tokens to victim
-		token.mint(address(this), 11e18);
+
+		token.buy{value: msg.value}(address(this));
 		token.approve(address(attacker), 1e18);
 		token.approve(address(victim), 10e18);
 		victim.deposit(10e18);
