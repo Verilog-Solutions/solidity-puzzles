@@ -26,7 +26,7 @@ This repo inlcudes three puzzles on smart contract written for Remix Game Day in
 - **Puzzle Two**: Safe and Sound
 	No worry, our transfer is secured.
 
-> Puzzle 3 is an extra puzzle. Try solve it and write a remix unit test yourself!
+> Puzzle 3 is an extra puzzle. Try solve it and write the unit tests yourself!
 
 ## Play with Remix
 
