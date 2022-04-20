@@ -57,7 +57,7 @@ After downloading the repo, we can load files either by connecting remix to loca
 
 We record the transactions which includes the contract deployments and attack executions. You can find them under the `tx_records` folder.
 
-Open a scenario file `puzzle*.json` under `tx_records` folder (make it the active tab inside Remix) and go to  `DEPLOY & RUN TRANSACTIONS` > `Transactions recorded` inside remix and click the play button. You can find a series transactions pop up automatically in remix console.
+Open a scenario file `puzzle*.json` (make it the active tab inside Remix) and go to  `DEPLOY & RUN TRANSACTIONS` > `Transactions recorded` inside remix and click the play button. You can find a series transactions pop up automatically in remix console.
 
 ### 3 Explore the Remix Debugger
 
