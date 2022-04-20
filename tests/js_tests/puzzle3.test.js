@@ -95,18 +95,12 @@ describe("Puzzle 3", function () {
 		const beforeBalanceDistributor = await token.balanceOf(distributor.address);
 		const beforeBalanceAttacker = await token.balanceOf(attacker.address);
 
-		console.log("beforeBalanceAttacker: " + beforeBalanceAttacker.toString());
-		console.log("beforeBalanceDistributor: " + beforeBalanceDistributor.toString());
-
-		// increase allowance[attacker => attacker contract] and deposit PST
+		// increase allowance[attacker => attacker contract] and deposit token
 		await token.connect(addr2).increaseAllowance(attacker.address, depositAmount);
 		await attacker.connect(addr2).attack(depositAmount);
 
 		const afterBalancedistributor = await token.balanceOf(distributor.address);
 		const afterBalanceAttacker = await token.balanceOf(attacker.address);
-
-		console.log("afterBalanceAttacker: " + afterBalanceAttacker.toString());
-		console.log("afterBalancedistributor: " + afterBalancedistributor.toString());
 
 		// About `above` and `below`:
 		// https://ethereum-waffle.readthedocs.io/en/latest/matchers.html#bignumbers

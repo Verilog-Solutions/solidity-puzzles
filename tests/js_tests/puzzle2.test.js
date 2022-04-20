@@ -52,16 +52,16 @@ describe("Puzzle 2", function () {
 	});
 
 	it("Test2: Legit user can deposit token to Victim. ", async function () {
-		const beforeBalanceAbraveVictim = await token.balanceOf(victim.address);
+		const beforeBalanceVictim = await token.balanceOf(victim.address);
 		const beforeBalanceUser1 = await token.balanceOf(addr1.address);
 
 		await token.connect(addr1).approve(victim.address, depositAmount);
 		await victim.connect(addr1).deposit(depositAmount);
 
-		const afterBalanceAbraveVictim = await token.balanceOf(victim.address);
+		const afterBalanceVictim = await token.balanceOf(victim.address);
 		const afterBalanceUser1 = await token.balanceOf(addr1.address);
 
-		expect(afterBalanceAbraveVictim.sub(beforeBalanceAbraveVictim)).to.equal(depositAmount);
+		expect(afterBalanceVictim.sub(beforeBalanceVictim)).to.equal(depositAmount);
 		expect(beforeBalanceUser1.sub(afterBalanceUser1)).to.equal(depositAmount);
 		expect(await victim.amounts(addr1.address)).to.equal(depositAmount);
 	});
@@ -71,42 +71,36 @@ describe("Puzzle 2", function () {
         await token.connect(addr1).approve(victim.address, depositAmount);
         await victim.connect(addr1).deposit(depositAmount);
 
-		const beforeBalanceAbraveVictim = await token.balanceOf(victim.address);
+		const beforeBalanceVictim = await token.balanceOf(victim.address);
 		const beforeBalanceUser1 = await token.balanceOf(addr1.address);
 
 		await victim.connect(addr1).withdraw(addr1.address);
 
-		const afterBalanceAbraveVictim = await token.balanceOf(victim.address);
+		const afterBalanceVictim = await token.balanceOf(victim.address);
 		const afterBalanceUser1 = await token.balanceOf(addr1.address);
 
-		expect(beforeBalanceAbraveVictim.sub(afterBalanceAbraveVictim)).to.equal(depositAmount);
+		expect(beforeBalanceVictim.sub(afterBalanceVictim)).to.equal(depositAmount);
 		expect(afterBalanceUser1.sub(beforeBalanceUser1)).to.equal(depositAmount);
 		expect(await victim.amounts(addr1.address)).to.equal(0);
 	});
 
 	it("Attack: Attacker can withdraw more token from Victim than he deposits.", async function () {
-		const beforeBalanceAbraveVictim = await token.balanceOf(victim.address);
+		const beforeBalanceVictim = await token.balanceOf(victim.address);
 		const beforeBalanceAttacker = await token.balanceOf(attacker.address);
-
-		console.log("beforeBalanceAttacker: " + beforeBalanceAttacker.toString());
-		console.log("beforeBalanceAbraveVictim: " + beforeBalanceAbraveVictim.toString());
 
 		// increase allowance[attacker => attacker contract]
 		await token.connect(addr2).approve(attacker.address, depositAmount);
 		// attacker contract will spend attacker's AGT in attack()
 		await attacker.connect(addr2).attack(depositAmount);
 
-		const afterBalanceAbraveVictim = await token.balanceOf(victim.address);
+		const afterBalanceVictim = await token.balanceOf(victim.address);
 		const afterBalanceAttacker = await token.balanceOf(attacker.address);
-
-		console.log("afterBalanceAttacker: " + afterBalanceAttacker.toString());
-		console.log("afterBalanceAbraveVictim: " + afterBalanceAbraveVictim.toString());
 
 		// About `above` and `below`:
 		// https://ethereum-waffle.readthedocs.io/en/latest/matchers.html#bignumbers
 		expect(afterBalanceAttacker.sub(beforeBalanceAttacker)).to.above(depositAmount);
 		// ^ attacker gets more than he deposit
-		expect(afterBalanceAbraveVictim).to.below(beforeBalanceAbraveVictim.sub(depositAmount));
+		expect(afterBalanceVictim).to.below(beforeBalanceVictim.sub(depositAmount));
 		// ^ victim losses more than attacker should take
 	});
 });

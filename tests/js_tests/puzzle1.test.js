@@ -43,64 +43,51 @@ describe("Puzzle 1", function () {
 
 	it("Test2: Legit user can store ether into Victim.", async function () {
 		const beforeBalanceUser1 = await addr1.getBalance();
-		const beforeBalanceDAOVictim = await ethers.provider.getBalance(victim.address);
-
-		console.log("t2 beforeBalanceUser1: " + beforeBalanceUser1.toString());
-		console.log("beforeBalanceDAOVictim: " + beforeBalanceDAOVictim.toString());
+		const beforeBalanceVictim = await ethers.provider.getBalance(victim.address);
 
 		await victim.connect(addr1).deposit({ value: depositAmount });
 
 		const afterBalanceUser1 = await addr1.getBalance();
 
-		console.log("t2 afterBalanceUser1: " + afterBalanceUser1.toString());
-		const afterBalanceDAOVictim = await ethers.provider.getBalance(victim.address);
+		const afterBalanceVictim = await ethers.provider.getBalance(victim.address);
 
 		// it's gte(greater or equal bc of tx gas cost)
 		expect(beforeBalanceUser1.sub(afterBalanceUser1)).to.gte(depositAmount);
 
-		expect(afterBalanceDAOVictim.sub(beforeBalanceDAOVictim)).to.equal(depositAmount);
+		expect(afterBalanceVictim.sub(beforeBalanceVictim)).to.equal(depositAmount);
 	});
 
 	it("Test3: Legit user can withdraw ether from Victim.", async function () {
 		// deposit first
 		await victim.connect(addr1).deposit({ value: depositAmount });
 
-		const beforeBalanceDAOVictim = await ethers.provider.getBalance(victim.address);
+		const beforeBalanceVictim = await ethers.provider.getBalance(victim.address);
 
-		// User1 has deposited ether into Victim in Test2,
-		// so we do withdraw
-
-		console.log("before u1 amount: ", (await victim.amounts(addr1.address)).toString());
+		// withdraw
 		await victim.connect(addr1).withdraw(addr1.address);
 
-		const afterBalanceDAOVictim = await ethers.provider.getBalance(victim.address);
+		const afterBalanceVictim = await ethers.provider.getBalance(victim.address);
 
-		expect(beforeBalanceDAOVictim.sub(afterBalanceDAOVictim)).to.equal(depositAmount);
+		expect(beforeBalanceVictim.sub(afterBalanceVictim)).to.equal(depositAmount);
 	});
 
 	it("Attack: Attacker can withdraw ether from Victim.", async function () {
-		const beforeBalanceDAOVictim = await ethers.provider.getBalance(victim.address);
+		const beforeBalanceVictim = await ethers.provider.getBalance(victim.address);
 		const beforeBalanceAttacker = await ethers.provider.getBalance(attacker.address);
-
-		console.log("beforeBalanceAttacker: " + beforeBalanceAttacker.toString());
-		console.log("beforeBalanceDAOVictim: " + beforeBalanceDAOVictim.toString());
 
 		// balance(Victim) = 1 ether; balance(AttackerDeposit) = .5 ether;
 		// so it reenter twice (aka withdraw three times) to drain the Victim.
 		// You'll see in the console logs.
 		await attacker.connect(addr2).attack({ value: depositAmount });
 
-		const afterBalanceDAOVictim = await ethers.provider.getBalance(victim.address);
+		const afterBalanceVictim = await ethers.provider.getBalance(victim.address);
 		const afterBalanceAttacker = await ethers.provider.getBalance(attacker.address);
 
 		// About `above` and `below`:
 		// https://ethereum-waffle.readthedocs.io/en/latest/matchers.html#bignumbers
 		expect(afterBalanceAttacker.sub(beforeBalanceAttacker)).to.above(depositAmount);
 		// ^ attacker gets more than he deposit
-		expect(afterBalanceDAOVictim).to.below(beforeBalanceDAOVictim.sub(depositAmount));
-		// ^ victim losses more than attacker should take
+		expect(afterBalanceVictim).to.below(beforeBalanceVictim.sub(depositAmount));
 
-		console.log("afterBalanceAttacker: " + afterBalanceAttacker.toString());
-		console.log("afterBalanceDAOVictim: " + afterBalanceDAOVictim.toString());
 	});
 });
