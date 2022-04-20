@@ -32,7 +32,13 @@ This repo inlcudes three puzzles on smart contract written for Remix Game Day in
 
 ### 1 Load files in remix
 
-- download the repo from github and run `yarn` to install all the packages
+- **Option 1** Load files using `dGit` plugin
+  1. Open [remix](https://remix.ethereum.org/);
+  2. Enable `dGit` plugin in the `PLUGIN MANAGER` tab;
+  3. In `dGit` > `CLONE, PUSH, PULL & REMOTES` > `CLONE`, enter URL to this github repo, then click `clone`; 
+  4. Go to `FILE EXPLORERS` > drag down `workspace` > select the latest workspace,
+
+- **Option 2** download the repo from github and run `yarn` to install all the packages
 
   ```shell
   git clone https://github.com/Verilog-Solutions/solidity-puzzles.git
@@ -43,6 +49,7 @@ This repo inlcudes three puzzles on smart contract written for Remix Game Day in
 - Inside remix, choose `Connect to Localhost`. All the files will be in the remix `File EXPLORER`
 
 After downloading the repo, we can load files either by connecting remix to local host or just by load from github.
+
 
 ### 2 Play Transactions Recordings
 
