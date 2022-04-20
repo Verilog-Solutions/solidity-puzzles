@@ -67,9 +67,9 @@ describe("Puzzle 2", function () {
 	});
 
 	it("Test3: Legit user can withdraw token from Victim. ", async function () {
-        // deposit first 
-        await token.connect(addr1).approve(victim.address, depositAmount);
-        await victim.connect(addr1).deposit(depositAmount);
+		// deposit first
+		await token.connect(addr1).approve(victim.address, depositAmount);
+		await victim.connect(addr1).deposit(depositAmount);
 
 		const beforeBalanceVictim = await token.balanceOf(victim.address);
 		const beforeBalanceUser1 = await token.balanceOf(addr1.address);

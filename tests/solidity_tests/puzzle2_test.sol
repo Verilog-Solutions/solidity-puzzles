@@ -42,7 +42,7 @@ contract puzzle2_test {
 	/// #value: 100
 	function beforeAll() public payable {
 		// <instantiate contract>
-		token = new ERC777TestToken(0); // abrave token is minted to account-0
+		token = new ERC777TestToken(0); // token is minted to account-0
 
 		victim = new Victim2(address(token));
 		attacker = new Attacker2(address(victim), address(token));
@@ -51,10 +51,10 @@ contract puzzle2_test {
 	/// Attacker: Attacker can withdraw more ERC777TestToken from Victim2 than he deposits
 	/// #sender: account-0
 	/// #value: 11000000000000000000
-	function attack() payable public {
+	function attack() public payable {
 		// deposit 10 tokens to victim
 
-		token.buy{value: msg.value}(address(this));
+		token.buy{ value: msg.value }(address(this));
 		token.approve(address(attacker), 1e18);
 		token.approve(address(victim), 10e18);
 		victim.deposit(10e18);

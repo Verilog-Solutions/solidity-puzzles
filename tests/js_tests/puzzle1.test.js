@@ -91,6 +91,5 @@ describe("Puzzle 1", function () {
 		expect(afterBalanceAttacker.sub(beforeBalanceAttacker)).to.above(depositAmount);
 		// ^ attacker gets more than he deposit
 		expect(afterBalanceVictim).to.below(beforeBalanceVictim.sub(depositAmount));
-
 	});
 });

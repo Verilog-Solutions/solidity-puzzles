@@ -25,8 +25,7 @@ contract Victim1 is IVictim {
 	mapping(address => uint256) public amounts;
 
 	//payable constructor. send some ether to this contract during construction
-	constructor() payable {
-	}
+	constructor() payable {}
 
 	function deposit() external payable override {
 		amounts[msg.sender] += msg.value;

@@ -41,12 +41,8 @@ contract puzzle1_test {
 	/// #value: 1000000000000000000
 	function beforeAll() public payable {
 		// <instantiate contract>
-
-		console.log("address account0", msg.sender);
 		victim = new Victim1{ value: msg.value }(); // initiate Victim1 with initial funds
 		attacker = new Attacker1(address(victim));
-
-		console.log("attacker balance", address(attacker).balance);
 	}
 
 	/// Test1: Victim1 should be initialize with proper initial fund.
