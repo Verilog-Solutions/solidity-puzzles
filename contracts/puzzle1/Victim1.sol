@@ -19,7 +19,7 @@ pragma solidity 0.8.6;
 import "./interface/IVictim.sol";
 
 /// @title Victim1
-/// @notice Victim contract for puzzle 2
+/// @notice Victim contract for puzzle 1
 /// @author Verilog Solutions
 contract Victim1 is IVictim {
 	mapping(address => uint256) public amounts;
