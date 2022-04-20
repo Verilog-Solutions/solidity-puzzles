@@ -17,17 +17,17 @@
 
 ```
 ==== Setting ====
-0. abraveToken = AbraveToken.deploy(initialSupply);
-1. abraveVictim = AbraveVictim.deploy(abraveToken.address);
-2. abraveToken.connect(owner).transfer(abraveVictim.address, initialSupply);
-3. abraveAttacker = AbraveAttacker.deploy(abraveVictim.address, abraveToken.address);
-4. abraveToken.connect(addr1).buy({ value: depositAmount });
-5. abraveToken.connect(attacker).buy({ value: depositAmount });
+0. erc777Token = ERC777Token.deploy(initialSupply);
+1. victim = Victim.deploy(erc777Token.address);
+2. erc777Token.connect(owner).transfer(victim.address, initialSupply);
+3. attacker = Attacker.deploy(victim.address, erc777Token.address);
+4. erc777Token.connect(addr1).buy({ value: depositAmount });
+5. erc777Token.connect(addr2).buy({ value: depositAmount });
 ==== Legit User ====
-6. abraveToken.connect(addr1).increaseAllowance(abraveVictim.address, depositAmount);
-7. abraveVictim.connect(addr1).deposit(depositAmount);
-8. abraveVictim.connect(addr1).withdraw(addr1.address);
+6. erc777Token.connect(addr1).approve(victim.address, depositAmount);
+7. victim.connect(addr1).deposit(depositAmount);
+8. victim.connect(addr1).withdraw(addr1.address);
 ==== Attacker ====
-9. abraveToken.connect(attacker).increaseAllowance(abraveAttacker.address, depositAmount);
-10. abraveAttacker.connect(attacker).attack(depositAmount);
+9. erc777Token.connect(addr2).approve(attacker.address, depositAmount);
+10. attacker.connect(addr2).attack(depositAmount);
 ```
